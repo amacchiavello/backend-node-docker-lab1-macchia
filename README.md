@@ -48,8 +48,6 @@ updated_at DATE NULL,
 PRIMARY KEY (id) 
 );
 
-## Resources
-
 
 ## Support
 
@@ -64,17 +62,24 @@ No tiene...
 Utiliza las siguientes imagenes desde el repositorio Github
 
 imagen: node:22:18
+
 imagen: mysql:9.4
+
 imagen: https://github.com/users/amacchiavello/packages/container/package/backend-node-docker-lab1-macchia:lab-1
+
 
 ## Secretos necesarios
 
 Antes de ejecutar `docker compose up`, debes crear los siguientes secretos, te posicionas en la raiz y actualizas los secretos,
 o puedes usar los archivos que vienen por default, los string contenidos en los secretos son referenciales, por seguridad se recomienda cambiarlos:
 
+
 echo "tuusuario" > secreto_usuario.txt
+
 echo "tupassword" > secreto_password.txt
+
 echo "tubasededatos" > secreto_base.txt
+
 
 ## configuracion infra
 
@@ -95,3 +100,15 @@ En cambio, si queremos bajar la infraestructura y ademas eliminar los volumenes,
     docker compose  down -v
 
 La tabla necesaria para que funcione la aplicación se crea si no existe en la base que ocupará el aplicativo.
+
+
+## Para probar la aplicacion se utilizan los siguientes comandos
+
+Creación de usuarios: 
+
+curl -X POST http://localhost:3000/users -H "Content-Type: application/json" -d '{"nombre":"Carlos López","edad":28}' 
+
+
+Listado de usuarios: 
+
+curl http://localhost:3000/users
