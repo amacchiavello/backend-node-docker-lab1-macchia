@@ -1,4 +1,4 @@
-## Description
+## Titulo
 
 Proyecto de laboratorio para la docker compose
 
@@ -49,15 +49,15 @@ PRIMARY KEY (id)
 );
 
 
-## Support
+## Soporte
 
 No tiene...
 
-## Stay in touch
+## Autor
 
 - Author - [Andres Macchiavello]
 
-## License
+## Recursos
 
 Utiliza las siguientes imagenes desde el repositorio Github
 
@@ -81,7 +81,7 @@ echo "tupassword" > secreto_password.txt
 echo "tubasededatos" > secreto_base.txt
 
 
-## configuracion infra
+## Configuracion infra
 
 Para levantar la infraestructura utilizando docker compose debemos:
 
