@@ -1,0 +1,57 @@
+name: miapp-macchia
+services:
+  db:
+    image: mysql:9.4
+    restart: always
+    environment:
+      MYSQL_ALLOW_EMPTY_PASSWORD: yes
+      MYSQL_DATABASE_FILE: /var/run/secrets/secreto_base
+      MYSQL_USER_FILE: /var/run/secrets/secreto_usuario
+      MYSQL_PASSWORD_FILE: /var/run/secrets/secreto_password
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+      - ./init-scripts:/docker-entrypoint-initdb.d
+    deploy:
+     resources:
+      limits:
+        cpus: "2"
+        memory: "512M"
+      reservations:
+        cpus: "1"
+        memory: "256M"
+    secrets:
+      - secreto_usuario
+      - secreto_password
+      - secreto_base
+  backend:
+    image: ghcr.io/amacchiavello/backend-node-docker-lab1-macchia:lab-1
+    build:
+      context: .
+      dockerfile: Dockerfile
+    restart: always
+    depends_on:
+      - db
+    environment:
+      DB_HOST: db
+      DB_PORT: 3306
+      DB_USERNAME_FILE: /var/run/secrets/secreto_usuario
+      DB_PASSWORD_FILE: /var/run/secrets/secreto_password
+      DB_NAME_FILE: /var/run/secrets/secreto_base
+    ports:
+      - "3000:4000"
+    secrets:
+      - secreto_usuario
+      - secreto_password
+      - secreto_base
+volumes:
+  mysql_data:
+secrets:
+  secreto_usuario:
+    file: secreto_usuario.txt
+  secreto_password:
+    file: secreto_password.txt
+  secreto_base:
+    file: secreto_base.txt
+

@@ -96,3 +96,23 @@ Nest is an MIT-licensed open source project. It can grow thanks to the sponsors 
 ## License
 
 Nest is [MIT licensed](https://github.com/nestjs/nest/blob/master/LICENSE).
+
+## configuracion infra
+
+Para levantar la infraestructura utilizando docker compose debemos:
+
+    docker compose up -d
+
+Para levantar la infraestructura utilizando docker compose y reconstruir la imagen de la aplicacion debemos:
+
+    docker compose up -d --build
+
+Si queremos bajar la infraestructura pero conservar los volumenes con las configuraciones de la aplicacion:
+
+    docker compose down
+
+En cambio, si queremos bajar la infraestructura y ademas eliminar los volumenes, lo hacemos con:
+
+    docker compose  down -v
+
+La tabla necesaria para que funcione la aplicación se crea si no existe en la base que ocupará el aplicativo.
